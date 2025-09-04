@@ -1,0 +1,10 @@
+name = "Product Map Builder"
+type = "theme"
+
+[blocks]
+  # This part MUST match the filename.
+  # [blocks.map_builder] tells Shopify to look for map_builder.liquid
+  [blocks.map_builder]
+  name = "Map Builder"
+  target = "product.main"
+  schema = {}

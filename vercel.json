@@ -1,0 +1,21 @@
+{
+  "builds": [
+    {
+      "src": "remix.config.js",
+      "use": "@vercel/remix"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/_static/(.*)",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      },
+      "dest": "/public/_static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
+}
