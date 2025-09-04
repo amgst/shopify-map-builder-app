@@ -1,0 +1,26 @@
+.map-wrapper {
+  position: relative;
+  width: 100%;
+  /* This creates an aspect ratio of 2.62:1 */
+  padding-top: 38.16%; 
+}
+
+.map-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.controls-panel {
+  padding: 16px;
+  text-align: center;
+}
+
+.preview-image {
+  width: 100%;
+  max-width: 600px;
+  border: 1px solid #ccc;
+  margin-top: 16px;
+}
