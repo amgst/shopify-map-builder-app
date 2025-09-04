@@ -1,32 +1,18 @@
-# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
-
 client_id = "7ce4ab9fe3899967c5350389c354edab"
 name = "mapapp"
-application_url = "https://mathematics-particles-incoming-glasses.trycloudflare.com"
-embedded = true
 handle = "mapapp-1"
+application_url = "https://mapapp-dun.vercel.app/auth"
+embedded = true
 
 [build]
 include_config_on_deploy = true
 automatically_update_urls_on_dev = true
 
-[webhooks]
-api_version = "2025-07"
-
-  [[webhooks.subscriptions]]
-  topics = [ "app/uninstalled" ]
-  uri = "/webhooks/app/uninstalled"
-
-  [[webhooks.subscriptions]]
-  topics = [ "app/scopes_update" ]
-  uri = "/webhooks/app/scopes_update"
-
 [access_scopes]
-# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
 scopes = "write_products"
 
 [auth]
-redirect_urls = ["https://mathematics-particles-incoming-glasses.trycloudflare.com/auth/callback", "https://mathematics-particles-incoming-glasses.trycloudflare.com/auth/shopify/callback", "https://mathematics-particles-incoming-glasses.trycloudflare.com/api/auth/callback"]
+redirect_urls = [ "https://mapapp-dun.vercel.app/auth/callback" ]
 
-[pos]
-embedded = false
+[webhooks]
+api_version = "2025-07"

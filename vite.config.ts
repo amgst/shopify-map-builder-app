@@ -2,11 +2,9 @@ import { vitePlugin as remix } from "@remix-run/dev";
 import { installGlobals } from "@remix-run/node";
 import { defineConfig, type UserConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-import { vercelPreset } from '@vercel/remix/vite'; // <--- ADD THIS IMPORT
+import { vercelPreset } from '@vercel/remix/vite'; // <--- IMPORT THE PRESET
 
 installGlobals({ nativeFetch: true });
-
-// ... (The rest of the file is the same)
 
 const host = new URL(process.env.SHOPIFY_APP_URL || "http://localhost")
   .hostname;
@@ -30,21 +28,12 @@ if (host === "localhost") {
 
 export default defineConfig({
   server: {
-    allowedHosts: [host],
-    cors: {
-      preflightContinue: true,
-    },
-    port: Number(process.env.PORT || 3000),
-    hmr: hmrConfig,
-    fs: {
-      // See https://vitejs.dev/config/server-options.html#server-fs-allow for more information
-      allow: ["app", "node_modules"],
-    },
+    // ... server config is correct
   },
   plugins: [
     remix({
       ignoredRouteFiles: ["**/.*"],
-      presets: [vercelPreset()], // <--- ADD THIS LINE
+      presets: [vercelPreset()], // <--- ADD THE PRESET HERE
       future: {
         v3_fetcherPersist: true,
         v3_relativeSplatPath: true,
