@@ -1,21 +1,135 @@
-{% assign avg_rating = block.settings.product.metafields.demo.avg_rating.value | round %}
-<span style="color:{{ block.settings.colour }}">
-  {% render 'stars', rating: avg_rating %}
-</span>
-{% if avg_rating >= 4 %}
-  <br>
-  <img src="{{ "thumbs-up.png" | asset_img_url: '15x' }}" height="15" width="15" loading="lazy">
-  {{ 'ratings.home.recommendationText' | t }}
-{% endif %}
+{{ 'map-builder-styles.css' | asset_url | stylesheet_tag }}
+
+<div id="map-builder-{{ block.id }}" class="map-builder-widget">
+  <div class="map-builder-container">
+    <h3>{{ block.settings.title | default: "Design Your Custom Map" }}</h3>
+    
+    <div class="product-selector">
+      <label>Product Type:</label>
+      <select id="product-type-{{ block.id }}">
+        <option value="standard">Standard Rectangle</option>
+        <option value="stick">Stick</option>
+        <option value="twig">Twig</option>
+        <option value="circle">Circle</option>
+      </select>
+    </div>
+
+    <div class="orientation-selector">
+      <label>Orientation:</label>
+      <select id="orientation-{{ block.id }}">
+        <option value="landscape">Landscape</option>
+        <option value="portrait">Portrait</option>
+      </select>
+    </div>
+
+    <div class="map-container-wrapper">
+      <div id="map-{{ block.id }}" class="customer-map"></div>
+      <div id="overlay-container-{{ block.id }}" class="overlay-container"></div>
+      <div class="map-controls">
+        <button type="button" class="zoom-in">+</button>
+        <button type="button" class="zoom-out">-</button>
+      </div>
+    </div>
+
+    <div class="location-search">
+      <input type="text" id="location-search-{{ block.id }}" placeholder="Search for a location (e.g., New York, NY)">
+      <button type="button" id="search-btn-{{ block.id }}">Search</button>
+    </div>
+
+    <div class="customization-panel">
+      <div class="text-controls">
+        <input type="text" id="custom-text-{{ block.id }}" placeholder="Add custom text">
+        <select id="font-select-{{ block.id }}">
+          <option value="Arial">Arial</option>
+          <option value="Times">Times</option>
+          <option value="Georgia">Georgia</option>
+        </select>
+        <button type="button" id="add-text-{{ block.id }}">Add Text</button>
+      </div>
+      
+      <div class="icon-controls">
+        <label>Add Icons:</label>
+        <div class="icon-library">
+          <button type="button" class="icon-btn" data-icon="🏠">🏠</button>
+          <button type="button" class="icon-btn" data-icon="🏫">🏫</button>
+          <button type="button" class="icon-btn" data-icon="🏥">🏥</button>
+          <button type="button" class="icon-btn" data-icon="⛪">⛪</button>
+          <button type="button" class="icon-btn" data-icon="🏪">🏪</button>
+          <button type="button" class="icon-btn" data-icon="🚗">🚗</button>
+          <button type="button" class="icon-btn" data-icon="🚶">🚶</button>
+          <button type="button" class="icon-btn" data-icon="🌳">🌳</button>
+        </div>
+      </div>
+      
+      <div class="action-controls">
+        <button type="button" id="add-compass-{{ block.id }}">Add Compass</button>
+        <button type="button" id="undo-{{ block.id }}">↶ Undo</button>
+        <button type="button" id="redo-{{ block.id }}">↷ Redo</button>
+        <button type="button" id="clear-all-{{ block.id }}">Clear All</button>
+      </div>
+      
+      <button type="button" id="capture-map-{{ block.id }}" class="primary-btn">
+        Create My Map
+      </button>
+    </div>
+
+    <div id="preview-{{ block.id }}" class="map-preview" style="display: none;">
+      <h4>Your Custom Map Preview</h4>
+      <canvas id="preview-canvas-{{ block.id }}" style="border: 2px solid #8b4513; border-radius: 8px; max-width: 100%;"></canvas>
+      
+      <div class="engraved-preview-section">
+        <h4>Final Engraved Product Preview</h4>
+        <div class="product-mockup">
+          <div class="wood-base"></div>
+          <canvas id="engraved-canvas-{{ block.id }}" class="engraved-overlay"></canvas>
+        </div>
+      </div>
+      
+      <img id="cart-preview-{{ block.id }}" class="cart-preview-image" style="display: none;" alt="Custom Map Preview">
+      
+      <button type="button" id="add-to-cart-{{ block.id }}" class="add-to-cart-btn">
+        Add Product with Custom Map
+      </button>
+      <p><small>This will add the current product with your custom map design</small></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.mapBuilderConfig = window.mapBuilderConfig || {};
+  window.mapBuilderConfig['{{ block.id }}'] = {
+    productId: {{ product.id | json }},
+    variantId: {{ product.selected_or_first_available_variant.id | json }},
+    price: {{ block.settings.price | default: 4999 }},
+    shopDomain: '{{ shop.permanent_domain }}'
+  };
+</script>
+
+{{ 'map-builder-loader.js' | asset_url | script_tag }}
 
 {% schema %}
 {
-  "name": "Star Rating",
+  "name": "Map Builder",
   "target": "section",
   "settings": [
-    { "type": "product", "id": "product", "label": "product", "autofill": true },
-    { "type": "color", "id": "colour", "label": "Star Colour", "default": "#ff0000" }
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Widget Title",
+      "default": "Design Your Custom Map"
+    },
+    {
+      "type": "number",
+      "id": "price",
+      "label": "Base Price (cents)",
+      "default": 4999
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_product",
+      "label": "Show on product pages",
+      "default": true
+    }
   ]
 }
 {% endschema %}
-

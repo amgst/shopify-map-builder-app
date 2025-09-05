@@ -1,18 +1,22 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
 client_id = "7ce4ab9fe3899967c5350389c354edab"
 name = "mapapp"
 handle = "mapapp-1"
-application_url = "https://mapapp-dun.vercel.app/auth"
+application_url = "https://cod-combinations-blair-mrna.trycloudflare.com"
 embedded = true
 
 [build]
-include_config_on_deploy = true
 automatically_update_urls_on_dev = true
+dev_store_url = "malihacollections.myshopify.com"
+include_config_on_deploy = true
 
 [access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
 scopes = "write_products"
 
 [auth]
-redirect_urls = [ "https://mapapp-dun.vercel.app/auth/callback" ]
+redirect_urls = ["https://cod-combinations-blair-mrna.trycloudflare.com/auth/callback", "https://cod-combinations-blair-mrna.trycloudflare.com/auth/shopify/callback", "https://cod-combinations-blair-mrna.trycloudflare.com/api/auth/callback"]
 
 [webhooks]
 api_version = "2025-07"

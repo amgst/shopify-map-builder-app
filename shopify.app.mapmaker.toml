@@ -1,0 +1,23 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "d48abf7ece144697efea1b3908078ac4"
+name = "mapmaker"
+application_url = "https://postal-dts-atmospheric-adjustment.trycloudflare.com"
+embedded = true
+handle = "mapmaker"
+
+[build]
+include_config_on_deploy = true
+
+[webhooks]
+api_version = "2025-07"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[auth]
+redirect_urls = ["https://postal-dts-atmospheric-adjustment.trycloudflare.com/auth/callback", "https://postal-dts-atmospheric-adjustment.trycloudflare.com/auth/shopify/callback", "https://postal-dts-atmospheric-adjustment.trycloudflare.com/api/auth/callback"]
+
+[pos]
+embedded = false
