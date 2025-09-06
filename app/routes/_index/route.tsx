@@ -1,51 +1,47 @@
-import type { LoaderFunctionArgs } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
-
-import { login } from "../../shopify.server";
+import { json } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
 
 import styles from "./styles.module.css";
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const url = new URL(request.url);
-
-  if (url.searchParams.get("shop")) {
-    throw redirect(`/app?${url.searchParams.toString()}`);
-  }
-
-  return { showForm: Boolean(login) };
+export const loader = async () => {
+  return json({ appName: "Custom Map Builder" });
 };
 
 export default function App() {
-  const { showForm } = useLoaderData<typeof loader>();
+  const { appName } = useLoaderData<typeof loader>();
 
   return (
     <div className={styles.index}>
       <div className={styles.content}>
-        <h1 className={styles.heading}>A short heading about [your app]</h1>
+        <h1 className={styles.heading}>Welcome to {appName}</h1>
         <p className={styles.text}>
-          A tagline about [your app] that describes your value proposition.
+          Create custom maps for your products with our easy-to-use map builder.
         </p>
-        {showForm && (
-          <Form className={styles.form} method="post" action="/auth/login">
-            <label className={styles.label}>
-              <span>Shop domain</span>
-              <input className={styles.input} type="text" name="shop" />
-              <span>e.g: my-shop-domain.myshopify.com</span>
-            </label>
-            <button className={styles.button} type="submit">
-              Log in
-            </button>
-          </Form>
-        )}
+        
+        <div style={{ margin: "2rem 0" }}>
+          <Link 
+            to="/map-editor" 
+            className={styles.button}
+            style={{ 
+              display: "inline-block", 
+              textDecoration: "none",
+              backgroundColor: "#2563eb",
+              color: "white",
+              padding: "1rem 2rem",
+              borderRadius: "6px",
+              fontWeight: "bold"
+            }}
+          >
+            Start Building Maps
+          </Link>
+        </div>
+        
         <ul className={styles.list}>
           <li>
-            <strong>Product feature</strong>. Some detail about your feature and
-            its benefit to your customer.
+            <strong>Easy Map Creation</strong>. Build custom maps with our intuitive interface.
           </li>
           <li>
-            <strong>Product feature</strong>. Some detail about your feature and
-            its benefit to your customer.
+            <strong>Multiple Formats</strong>. Choose from rectangles, sticks, twigs, and circles.
           </li>
           <li>
             <strong>Product feature</strong>. Some detail about your feature and
