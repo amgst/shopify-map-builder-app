@@ -2,7 +2,7 @@
 
 client_id = "fc38a6597a3c44320deb9ea096751aed"
 name = "mapapp"
-application_url = "https://ec-tomato-hollow-ppm.trycloudflare.com"
+application_url = "https://las-suspended-worn-span.trycloudflare.com"
 embedded = true
 handle = "mapapp-2"
 
@@ -18,7 +18,7 @@ api_version = "2025-07"
 scopes = "write_products"
 
 [auth]
-redirect_urls = ["https://ec-tomato-hollow-ppm.trycloudflare.com/auth/callback", "https://ec-tomato-hollow-ppm.trycloudflare.com/auth/shopify/callback", "https://ec-tomato-hollow-ppm.trycloudflare.com/api/auth/callback"]
+redirect_urls = ["https://las-suspended-worn-span.trycloudflare.com/auth/callback", "https://las-suspended-worn-span.trycloudflare.com/auth/shopify/callback", "https://las-suspended-worn-span.trycloudflare.com/api/auth/callback"]
 
 [pos]
 embedded = false
