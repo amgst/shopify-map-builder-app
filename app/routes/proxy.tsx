@@ -6,7 +6,7 @@ import { createStorefrontService } from "../utils/storefront.server";
 import { validateProxyRequest } from "../utils/proxy-validator.server";
 
 // Shopify App Proxy Route
-// This route handles requests from: malihacollections.com/apps/map-editor
+// This route handles requests from: malihacollections.com/editor/
 // Shopify proxies these requests to: your-app-url.com/proxy
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {

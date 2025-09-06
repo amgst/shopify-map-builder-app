@@ -1,11 +1,11 @@
 # Shopify App Proxy Setup Guide
 
-This guide explains how to configure your Shopify app to work with the app proxy system, allowing your map editor to be accessible at `https://malihacollections.com/apps/map-editor`.
+This guide explains how to configure your Shopify app to work with the app proxy system, allowing your map editor to be accessible at `https://malihacollections.com/editor/`.
 
 ## 🎯 Overview
 
 The app proxy allows your custom map builder to:
-- Run on your store's domain (`malihacollections.com/apps/map-editor`)
+- Run on your store's domain (`malihacollections.com/editor/`)
 - Integrate seamlessly with Shopify's cart system
 - Maintain customer sessions and store context
 - Provide a professional, branded experience
@@ -26,21 +26,21 @@ The app proxy allows your custom map builder to:
 3. **Configure the following settings:**
 
 ```
-Subpath prefix: /apps
-Subpath: /map-editor
+Subpath prefix: (leave empty)
+Subpath: /editor
 Proxy URL: https://your-deployed-app.com/proxy
 ```
 
 ### Example Configuration:
 ```
-Subpath prefix: /apps
-Subpath: /map-editor  
+Subpath prefix: (leave empty)
+Subpath: /editor
 Proxy URL: https://your-app-domain.com/proxy
 ```
 
 **Note:** Replace `your-app-domain.com` with your actual deployed app URL (e.g., from Railway, Heroku, or your custom domain).
 
-**Result:** `https://malihacollections.com/apps/map-editor` → Your app's `/proxy` route
+**Result:** `https://malihacollections.com/editor/` → Your app's `/proxy` route
 
 ## 🚀 Step 2: Deploy Your App
 
@@ -97,12 +97,12 @@ SHOPIFY_STOREFRONT_ACCESS_TOKEN=your-storefront-token-here
 
 2. **Through Shopify (after proxy setup):**
    ```
-   https://malihacollections.com/apps/map-editor
-   ```
+   https://malihacollections.com/editor/
+```
 
 ### Expected Flow:
 ```
-Customer visits: malihacollections.com/apps/map-editor
+Customer visits: malihacollections.com/editor/
         ↓
 Shopify proxies to: your-app.com/proxy
         ↓
@@ -178,4 +178,4 @@ If you encounter issues:
 
 ---
 
-**🎯 Goal:** `https://malihacollections.com/apps/map-editor` should load your custom map builder and allow customers to add maps to their cart seamlessly!
+**🎯 Goal:** `https://malihacollections.com/editor/` should load your custom map builder and allow customers to add maps to their cart seamlessly!
