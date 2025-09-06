@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cp prisma/schema.production.prisma prisma/schema.prisma && npx prisma generate && npm run build",
+  "buildCommand": "npx prisma generate && npm run build",
   "outputDirectory": "build/client",
   "framework": "remix",
   "env": {
@@ -7,6 +7,6 @@
     "SHOPIFY_API_SECRET": "@shopify_api_secret",
     "SHOPIFY_APP_URL": "@shopify_app_url",
     "SCOPES": "@scopes",
-    "DATABASE_URL": "@database_url"
+    "DATABASE_URL": "file:./dev.db"
   }
 }

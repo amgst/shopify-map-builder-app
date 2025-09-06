@@ -1,13 +1,8 @@
 import type { HeadersFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { Link, Outlet, useLoaderData, useRouteError } from "@remix-run/react";
 import { boundary } from "@shopify/shopify-app-remix/server";
-import { AppProvider } from "@shopify/shopify-app-remix/react";
-import { NavMenu } from "@shopify/app-bridge-react";
-import polarisStyles from "@shopify/polaris/build/esm/styles.css?url";
 
 import { authenticate } from "../shopify.server";
-
-export const links = () => [{ rel: "stylesheet", href: polarisStyles }];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   await authenticate.admin(request);
@@ -19,20 +14,24 @@ export default function App() {
   const { apiKey } = useLoaderData<typeof loader>();
 
   return (
-    <AppProvider isEmbeddedApp apiKey={apiKey}>
-      <NavMenu>
-        <Link to="/app" rel="home">
-          Home
-        </Link>
-        <Link to="/app/settings">Settings</Link>
-        <Link to="/app/orders">Map Orders</Link>
-      </NavMenu>
-      <Outlet />
-    </AppProvider>
+    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+      <h1>Minimal Shopify App (No Polaris)</h1>
+      <nav style={{ marginBottom: "20px" }}>
+        <Link to="/app" style={{ marginRight: "10px" }}>Home</Link>
+        <Link to="/app/settings" style={{ marginRight: "10px" }}>Settings</Link>
+        <Link to="/app/orders" style={{ marginRight: "10px" }}>Map Orders</Link>
+        <Link to="/health" style={{ marginRight: "10px" }}>Health Check</Link>
+      </nav>
+      <div style={{ border: "1px solid #ccc", padding: "10px" }}>
+        <Outlet />
+      </div>
+      <p style={{ marginTop: "20px", fontSize: "12px", color: "#666" }}>
+        API Key: {apiKey ? "✓ Configured" : "✗ Missing"}
+      </p>
+    </div>
   );
 }
 
-// Shopify needs Remix to catch some thrown responses, so that their headers are included in the response.
 export function ErrorBoundary() {
   return boundary.error(useRouteError());
 }
