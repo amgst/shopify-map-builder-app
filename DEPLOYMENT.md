@@ -31,11 +31,15 @@ SHOP_DOMAIN=your-shop.myshopify.com
 
 ## Deployment Steps
 
-1. **Set up PostgreSQL Database**
+1. **Switch to Vercel Adapter** (CRITICAL)
+   - Ensure `app/shopify.server.ts` uses: `import "@shopify/shopify-app-remix/adapters/vercel";`
+   - This prevents the "Serverless Function has crashed" error
+
+2. **Set up PostgreSQL Database**
    - Create a PostgreSQL database (Vercel Postgres recommended)
    - Copy the connection string
 
-2. **Configure Environment Variables**
+3. **Configure Environment Variables**
    ```bash
    vercel env add SHOPIFY_API_KEY
    vercel env add SHOPIFY_API_SECRET
@@ -44,12 +48,12 @@ SHOP_DOMAIN=your-shop.myshopify.com
    vercel env add DATABASE_URL
    ```
 
-3. **Deploy to Vercel**
+4. **Deploy to Vercel**
    ```bash
    vercel --prod
    ```
 
-4. **Run Database Migration** (after first deployment)
+5. **Run Database Migration** (after first deployment)
    ```bash
    # Set DATABASE_URL to your production database
    npx prisma migrate deploy
