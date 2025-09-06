@@ -2,7 +2,7 @@
 
 client_id = "3a4811568d3fedf243ee35d222f2ed7c"
 name = "mapmaker2"
-application_url = "https://worry-thirty-prices-them.trycloudflare.com"
+application_url = "https://inter-pale-wal-watch.trycloudflare.com"
 embedded = true
 handle = "mapmaker2"
 
@@ -18,7 +18,7 @@ api_version = "2025-07"
 scopes = "write_products"
 
 [auth]
-redirect_urls = ["https://worry-thirty-prices-them.trycloudflare.com/auth/callback", "https://worry-thirty-prices-them.trycloudflare.com/auth/shopify/callback", "https://worry-thirty-prices-them.trycloudflare.com/api/auth/callback"]
+redirect_urls = ["https://inter-pale-wal-watch.trycloudflare.com/auth/callback", "https://inter-pale-wal-watch.trycloudflare.com/auth/shopify/callback", "https://inter-pale-wal-watch.trycloudflare.com/api/auth/callback"]
 
 [pos]
 embedded = false
