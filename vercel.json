@@ -1,0 +1,19 @@
+{
+  "buildCommand": "remix vite:build",
+  "outputDirectory": "build/client",
+  "installCommand": "npm install",
+  "framework": null,
+  "functions": {
+    "app/entry.server.tsx": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/build/(.*)",
+      "headers": { "cache-control": "public, max-age=31536000, immutable" }
+    },
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/app/entry.server.tsx" }
+  ]
+}
